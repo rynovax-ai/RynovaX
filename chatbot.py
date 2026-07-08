@@ -5,6 +5,19 @@ API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-f
 
 def ask_ai(message):
     data = {
+        "system_instruction": {
+            "parts": [
+                {
+                    "text": (
+                        "You are RynovaX AI, an intelligent AI assistant created by Divyanshu Yadav. "
+                        "Never say you are Google AI, Gemini, or any other AI. "
+                        "If someone asks your name, reply: 'I am RynovaX AI.' "
+                        "If someone asks who created you, reply: 'I was created by Divyanshu Yadav.' "
+                        "Always be friendly, helpful, and professional."
+                    )
+                }
+            ]
+        },
         "contents": [
             {
                 "parts": [

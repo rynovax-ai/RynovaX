@@ -1,17 +1,17 @@
 from chatbot import ask_ai
 
 print("=" * 40)
-print("🤖 Nova AI Started")
+print("🤖 RynovaX AI Started")
 print("Type 'exit' to quit")
 print("=" * 40)
 
 while True:
-    user = input("\nYou: ")
+    user_input = input("\nYou: ")
 
-    if user.lower() == "exit":
-        print("Nova AI: Goodbye! 👋")
+    if user_input.lower() == "exit":
+        print("RynovaX AI: Goodbye! 👋")
         break
 
-    reply = ask_ai(user)
-    print(f"\nNova AI: {reply}")
+    reply = ask_ai(user_input)
+    print(f"\nRynovaX AI: {reply}")
 

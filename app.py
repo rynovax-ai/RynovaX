@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from chatbot import ask_ai
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def home():
@@ -12,10 +14,9 @@ def chat():
     data = request.get_json()
 
     if not data or "message" not in data:
-        return jsonify({"error": "No message provided"}), 400
+        return jsonify({"error": "No message"}), 400
 
-    user_message = data["message"]
-    reply = ask_ai(user_message)
+    reply = ask_ai(data["message"])
 
     return jsonify({
         "reply": reply

@@ -14,10 +14,11 @@ async function sendMessage() {
     userInput.value = "";
 
     chatBox.innerHTML += `
-        <div class="message ai" id="loading">
-            🤖 RynovaX AI is typing<span class="typing-dots">...</span>
-         </div>
-    `;
+<div class="message user">
+    <div class="avatar user-avatar">👤</div>
+    <div class="bubble">${message}</div>
+</div>
+`;
 
     chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -47,10 +48,11 @@ async function sendMessage() {
         document.getElementById("loading").remove();
 
         chatBox.innerHTML += `
-            <div class="message ai">
-                ❌ Unable to connect to RynovaX AI.
-            </div>
-        `;
+<div class="message ai">
+    <div class="avatar ai-avatar">🤖</div>
+    <div class="bubble">${data.reply}</div>
+</div>
+`;
     }
 
     chatBox.scrollTop = chatBox.scrollHeight;

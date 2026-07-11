@@ -15,8 +15,8 @@ async function sendMessage() {
 
     chatBox.innerHTML += `
         <div class="message ai" id="loading">
-            🤖 RynovaX AI is thinking...
-        </div>
+            🤖 RynovaX AI is typing<span class="typing-dots">...</span>
+         </div>
     `;
 
     chatBox.scrollTop = chatBox.scrollHeight;

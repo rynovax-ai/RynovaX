@@ -8,11 +8,21 @@ async function sendMessage() {
     if (!message) return;
 
     chatBox.innerHTML += `
-        <div class="message user">${message}</div>
-    `;
+<div class="message user">
+    <div class="avatar user-avatar">👤</div>
+    <div class="bubble">${message}</div>
+</div>
+`;
 
     userInput.value = "";
-
+chatBox.innerHTML += `
+<div class="message ai" id="loading">
+    <div class="avatar ai-avatar">🤖</div>
+    <div class="bubble">
+        RynovaX AI is typing<span class="typing-dots">...</span>
+    </div>
+</div>
+`;
     chatBox.innerHTML += `
 <div class="message user">
     <div class="avatar user-avatar">👤</div>
@@ -38,21 +48,16 @@ async function sendMessage() {
         document.getElementById("loading").remove();
 
         chatBox.innerHTML += `
-            <div class="message ai">
-                ${data.reply}
-            </div>
-        `;
-
-    } catch (error) {
-
-        document.getElementById("loading").remove();
-
-        chatBox.innerHTML += `
 <div class="message ai">
     <div class="avatar ai-avatar">🤖</div>
     <div class="bubble">${data.reply}</div>
 </div>
 `;
+
+    } catch (error) {
+
+        document.getElementById("loading")?.remove();  
+
     }
 
     chatBox.scrollTop = chatBox.scrollHeight;

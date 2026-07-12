@@ -96,3 +96,19 @@ userInput.addEventListener("keypress", function(e) {
     }
 
 });
+clearBtn.addEventListener("click", function () {
+
+    localStorage.removeItem("rynovax_chat");
+
+    chatBox.innerHTML = `
+<div class="message ai">
+    <div class="avatar ai-avatar">🤖</div>
+    <div class="bubble">
+        <b>RynovaX AI</b><br><br>
+        Chat cleared successfully.<br>
+        How can I help you today?
+    </div>
+</div>
+`;
+
+});

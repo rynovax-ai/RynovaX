@@ -23,12 +23,6 @@ chatBox.innerHTML += `
     </div>
 </div>
 `;
-    chatBox.innerHTML += `
-<div class="message user">
-    <div class="avatar user-avatar">👤</div>
-    <div class="bubble">${message}</div>
-</div>
-`;
 
     chatBox.scrollTop = chatBox.scrollHeight;
 

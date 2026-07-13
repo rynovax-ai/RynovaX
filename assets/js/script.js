@@ -2,6 +2,13 @@ const chatBox = document.getElementById("chatBox");
 const userInput = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 
+function getCurrentTime() {
+    return new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
+
 // Load old chat
 window.onload = function () {
     const savedChat = localStorage.getItem("rynovax_chat");
@@ -22,7 +29,10 @@ async function sendMessage() {
     chatBox.innerHTML += `
 <div class="message user">
     <div class="avatar user-avatar">👤</div>
-    <div class="bubble">${message}</div>
+    <div class="bubble">
+    ${message}
+    <div class="time">${getCurrentTime()}
+</div>
 </div>
 `;
 
@@ -60,7 +70,10 @@ async function sendMessage() {
         chatBox.innerHTML += `
 <div class="message ai">
     <div class="avatar ai-avatar">🤖</div>
-    <div class="bubble">${data.reply}</div>
+    <div class="bubble">
+    ${data.reply}
+    <div class="time">${getCurrentTime()}
+</div>
 </div>
 `;
 

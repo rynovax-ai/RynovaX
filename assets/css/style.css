@@ -156,3 +156,9 @@ button:hover{
     max-width:100%;
     word-break:break-word;
 }
+.time{
+    font-size:12px;
+    opacity:0.6;
+    margin-top:6px;
+    text-align:right;
+}

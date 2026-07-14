@@ -162,3 +162,36 @@ button:hover{
     margin-top:6px;
     text-align:right;
 }
+/* ===== Top Header ===== */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 20px;
+    background:#111827;
+    border-bottom:1px solid #263041;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#60a5fa;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.menu-btn,
+.settings-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:26px;
+    cursor:pointer;
+}
+
+.menu-btn:hover,
+.settings-btn:hover{
+    color:#60a5fa;
+}

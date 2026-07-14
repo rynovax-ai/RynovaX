@@ -2,6 +2,11 @@ const chatBox = document.getElementById("chatBox");
 const userInput = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 
+const sidebar = document.getElementById("sidebar");
+const menuBtn = document.querySelector(".menu-btn");
+const clearBtn = document.getElementById("clearBtn");
+const historyBtn = document.getElementById("historyBtn");
+
 function getCurrentTime() {
     return new Date().toLocaleTimeString([], {
         hour: "2-digit",
@@ -109,8 +114,7 @@ userInput.addEventListener("keypress", function(e) {
     }
 
 });
-clearBtn.addEventListener("click", function () {
-
+clearBtn.addEventListener("click", () => {
     localStorage.removeItem("rynovax_chat");
 
     chatBox.innerHTML = `
@@ -118,10 +122,24 @@ clearBtn.addEventListener("click", function () {
     <div class="avatar ai-avatar">🤖</div>
     <div class="bubble">
         <b>RynovaX AI</b><br><br>
-        Chat cleared successfully.<br>
+        Hello! I am RynovaX AI.<br>
         How can I help you today?
     </div>
 </div>
 `;
+});
+
+menuBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+});
+historyBtn.addEventListener("click", () => {
+
+    const savedChat = localStorage.getItem("rynovax_chat");
+
+    if (savedChat) {
+        alert("✅ Chat History Available");
+    } else {
+        alert("❌ No Chat History Found");
+    }
 
 });

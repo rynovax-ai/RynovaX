@@ -1,3 +1,9 @@
+// ==========================
+// RynovaX AI v2
+// Created by Divyanshu Yadav
+// ==========================
+
+// Elements
 const chatBox = document.getElementById("chatBox");
 const userInput = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
@@ -8,55 +14,72 @@ const menuBtn = document.querySelector(".menu-btn");
 const clearBtn = document.getElementById("clearBtn");
 const historyBtn = document.getElementById("historyBtn");
 const newChatBtn = document.getElementById("newChatBtn");
+
 const historyList = document.getElementById("historyList");
 
+// Storage
 let chats = JSON.parse(localStorage.getItem("rynovax_chats")) || [];
 
-function getCurrentTime() {
-    return new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
+// Time
+function getCurrentTime(){
+
+    return new Date().toLocaleTimeString([],{
+
+        hour:"2-digit",
+
+        minute:"2-digit"
+
     });
+
 }
 
-// Load Saved Chat
-window.onload = function () {
+// Load Page
+window.onload=function(){
 
-    const savedChat = localStorage.getItem("rynovax_chat");
+    const savedChat=localStorage.getItem("rynovax_chat");
 
-    if (savedChat) {
-        chatBox.innerHTML = savedChat;
+    if(savedChat){
+
+        chatBox.innerHTML=savedChat;
+
     }
 
     loadHistory();
 
 };
 
-// Load History List
-function loadHistory() {
+// History List
+function loadHistory(){
 
-    historyList.innerHTML = "";
+    historyList.innerHTML="";
 
-    chats.forEach((chat, index) => {
+    chats.forEach((chat,index)=>{
 
-        historyList.innerHTML += `
-        <div class="history-item" onclick="openChat(${index})">
-            💬 ${chat.title}
-        </div>
-        `;
+        historyList.innerHTML+=`
+
+<div class="history-item" onclick="openChat(${index})">
+
+💬 ${chat.title}
+
+</div>
+
+`;
 
     });
 
 }
 
-// Open Old Chat
+// Open Chat
 function openChat(index){
 
-    chatBox.innerHTML = chats[index].content;
+    chatBox.innerHTML=chats[index].content;
 
     localStorage.setItem(
+
         "rynovax_chat",
+
         chats[index].content
+
     );
 
 }
@@ -83,12 +106,15 @@ function saveChat(title){
     loadHistory();
 
 }
+// ==========================
 // Send Message
-async function sendMessage() {
+// ==========================
+
+async function sendMessage(){
 
     const message = userInput.value.trim();
 
-    if (!message) return;
+    if(!message) return;
 
     const chatTitle =
         message.length > 25
@@ -108,7 +134,7 @@ async function sendMessage() {
 
     userInput.value = "";
 
-    // Typing
+    // Typing Animation
     chatBox.innerHTML += `
 <div class="message ai" id="loading">
     <div class="avatar ai-avatar">🤖</div>
@@ -146,8 +172,6 @@ async function sendMessage() {
     <div class="bubble">
         ${data.reply}
         <div class="time">${getCurrentTime()}</div>
-    </div>
-</div>
 `;
 
     }catch(error){
@@ -175,6 +199,10 @@ async function sendMessage() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
 }
+// ==========================
+// Buttons & Events
+// ==========================
+
 // Send Button
 sendBtn.addEventListener("click", sendMessage);
 
@@ -187,17 +215,17 @@ userInput.addEventListener("keypress", function(e){
 
 });
 
-// Sidebar
-menuBtn.addEventListener("click",function(){
+// Sidebar Toggle
+menuBtn.addEventListener("click", function(){
 
     sidebar.classList.toggle("active");
 
 });
 
 // New Chat
-newChatBtn.addEventListener("click",function(){
+newChatBtn.addEventListener("click", function(){
 
-    chatBox.innerHTML=`
+    chatBox.innerHTML = `
 <div class="message ai">
     <div class="avatar ai-avatar">🤖</div>
     <div class="bubble">
@@ -210,16 +238,16 @@ newChatBtn.addEventListener("click",function(){
 
     localStorage.removeItem("rynovax_chat");
 
-    chatBox.scrollTop=0;
+    chatBox.scrollTop = 0;
 
 });
 
 // Clear Chat
-clearBtn.addEventListener("click",function(){
+clearBtn.addEventListener("click", function(){
 
     if(confirm("Clear current chat?")){
 
-        chatBox.innerHTML=`
+        chatBox.innerHTML = `
 <div class="message ai">
     <div class="avatar ai-avatar">🤖</div>
     <div class="bubble">
@@ -237,7 +265,7 @@ clearBtn.addEventListener("click",function(){
 });
 
 // History Button
-historyBtn.addEventListener("click",function(){
+historyBtn.addEventListener("click", function(){
 
     if(chats.length===0){
 

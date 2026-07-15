@@ -123,10 +123,10 @@ async function sendMessage(){
 
     // User Message
     chatBox.innerHTML += `
-<div class="message user">
-    <div class="avatar user-avatar">👤</div>
+<div class="message ai">
+    <div class="avatar ai-avatar">🤖</div>
     <div class="bubble">
-        ${message}
+        ${data.reply}
         <div class="time">${getCurrentTime()}</div>
     </div>
 </div>

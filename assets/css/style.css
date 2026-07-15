@@ -51,24 +51,20 @@ main{
 }
 
 .message{
-    max-width:80%;
-    padding:14px 18px;
-    border-radius:18px;
-    line-height:1.6;
-    animation:fade .25s ease;
-    word-wrap:break-word;
+    display:flex;
+    align-items:flex-end;
+    gap:10px;
+    margin:12px 0;
 }
 
 .ai{
-    align-self:flex-start;
-    background:#1e293b;
-    border:1px solid #334155;
+    justify-content:flex-start;
 }
 
 .user{
-    align-self:flex-end;
-    background:#2563eb;
+    justify-content:flex-end;
 }
+@media (max-width:768px){
 
 .input-area{
     position:fixed;
@@ -177,11 +173,21 @@ button:hover{
 }
 
 .bubble{
+    display:inline-block;
+    width:auto;
+    max-width:520px;      /* Desktop */
+    min-width:40px;
+
     padding:12px 16px;
-    border-radius:16px;
-    max-width:75%;
-    width:fit-content;
-    word-break:break-word;
+
+    border-radius:18px;
+
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+
+    line-height:1.6;
+    font-size:15px;
 }
 .time{
     font-size:12px;
@@ -291,4 +297,51 @@ button:hover{
 
 .sidebar button:hover{
     background:#2563eb;
+}
+/* ===== ChatGPT Style Chat ===== */
+
+.message{
+    display:flex;
+    align-items:flex-end;
+    gap:10px;
+    margin:14px 0;
+}
+
+.ai{
+    justify-content:flex-start;
+}
+
+.user{
+    justify-content:flex-end;
+}
+
+.bubble{
+    display:inline-block;
+    width:fit-content;
+    max-width:75%;
+    padding:12px 16px;
+    border-radius:18px;
+    line-height:1.6;
+    font-size:15px;
+    white-space:pre-wrap;
+    overflow-wrap:break-word;
+}
+
+.ai .bubble{
+    background:#202123;
+    color:#fff;
+    border-top-left-radius:6px;
+}
+
+.user .bubble{
+    background:#2563eb;
+    color:#fff;
+    border-top-right-radius:6px;
+}
+
+.time{
+    margin-top:6px;
+    font-size:11px;
+    opacity:.6;
+    text-align:right;
 }

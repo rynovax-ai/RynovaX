@@ -1,118 +1,97 @@
-// ==========================================
-// RynovaX AI v4
-// Created by Divyanshu Yadav
-// ==========================================
+// =========================================
+// RynovaX AI v6
+// Part 1
+// =========================================
 
-// ===== Elements =====
-
+// Elements
 const chatBox = document.getElementById("chatBox");
-
 const userInput = document.getElementById("userInput");
-
 const sendBtn = document.getElementById("sendBtn");
 
 const menuBtn = document.getElementById("menuBtn");
-
 const sidebar = document.getElementById("sidebar");
 
 const newChatBtn = document.getElementById("newChatBtn");
-
-const historyBtn = document.getElementById("historyBtn");
-
 const clearBtn = document.getElementById("clearBtn");
-
+const historyBtn = document.getElementById("historyBtn");
 const historyList = document.getElementById("historyList");
 
-// ===== Storage =====
+// Storage
+let chats = JSON.parse(localStorage.getItem("rynovax_chats")) || [];
 
-let chats = JSON.parse(
-
-localStorage.getItem("rynovax_chats")
-
-) || [];
-
-// ===== Time =====
-
+// Time
 function getTime(){
 
-return new Date().toLocaleTimeString([],{
+    return new Date().toLocaleTimeString([],{
 
-hour:"2-digit",
+        hour:"2-digit",
+        minute:"2-digit"
 
-minute:"2-digit"
-
-});
-
-}
-
-// ===== Load Chat =====
-
-window.onload=function(){
-
-const savedChat=
-
-localStorage.getItem("rynovax_chat");
-
-if(savedChat){
-
-chatBox.innerHTML=savedChat;
+    });
 
 }
 
-loadHistory();
+// Save Current Chat
+function saveCurrentChat(){
+
+    localStorage.setItem(
+
+        "rynovax_chat",
+
+        chatBox.innerHTML
+
+    );
+
+}
+
+// Load Current Chat
+window.onload = function(){
+
+    const saved = localStorage.getItem("rynovax_chat");
+
+    if(saved){
+
+        chatBox.innerHTML = saved;
+
+    }
+
+    loadHistory();
 
 };
 
-// ===== Save Current Chat =====
-
-function saveCurrentChat(){
-
-localStorage.setItem(
-
-"rynovax_chat",
-
-chatBox.innerHTML
-
-);
-
-}
-
-// ===== Save History =====
-
+// Save History
 function saveHistory(title){
 
-chats.unshift({
+    chats.unshift({
 
-title:title,
+        title:title,
 
-content:chatBox.innerHTML
+        content:chatBox.innerHTML
 
-});
+    });
 
-localStorage.setItem(
+    localStorage.setItem(
 
-"rynovax_chats",
+        "rynovax_chats",
 
-JSON.stringify(chats)
+        JSON.stringify(chats)
 
-);
+    );
 
-loadHistory();
+    loadHistory();
 
 }
 
-// ===== Load History =====
-
+// Load History
 function loadHistory(){
 
-historyList.innerHTML="";
+    historyList.innerHTML = "";
 
-chats.forEach((chat,index)=>{
+    chats.forEach((chat,index)=>{
 
-historyList.innerHTML+=`
+        historyList.innerHTML += `
 
-<div
-class="history-item"
+<div class="history-item"
 onclick="openHistory(${index})">
 
 💬 ${chat.title}
@@ -121,43 +100,39 @@ onclick="openHistory(${index})">
 
 `;
 
-});
+    });
 
 }
 
-// ===== Open History =====
-
+// Open History
 function openHistory(index){
 
-chatBox.innerHTML=
+    chatBox.innerHTML = chats[index].content;
 
-chats[index].content;
+    saveCurrentChat();
 
-saveCurrentChat();
+    sidebar.classList.remove("active");
 
 }
 
-// ==========================================
+// =========================================
 // Send Message
-// ==========================================
+// =========================================
 
 async function sendMessage(){
 
-const message=userInput.value.trim();
+    const message = userInput.value.trim();
 
-if(message==="") return;
+    if(message==="") return;
 
-const title=
+    const title =
+    message.length>30
+    ? message.substring(0,30)+"..."
+    : message;
 
-message.length>30
+    // User Message
 
-?message.substring(0,30)+"..."
-
-:message;
-
-// ---------- USER MESSAGE ----------
-
-chatBox.innerHTML+=`
+    chatBox.innerHTML += `
 
 <div class="message user">
 
@@ -165,15 +140,15 @@ chatBox.innerHTML+=`
 
 ${message}
 
-<div class="time">
+<span class="time">
 
 ${getTime()}
 
-</div>
+</span>
 
 </div>
 
-<div class="avatar user-avatar">
+<div class="avatar">
 
 👤
 
@@ -183,19 +158,17 @@ ${getTime()}
 
 `;
 
-userInput.value="";
+    userInput.value="";
 
-chatBox.scrollTop=chatBox.scrollHeight;
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-// ---------- Typing ----------
+    // Typing
 
-chatBox.innerHTML+=`
+    chatBox.innerHTML += `
 
-<div class="message ai"
+<div class="message ai" id="typing">
 
-id="typing">
-
-<div class="avatar ai-avatar">
+<div class="avatar">
 
 🤖
 
@@ -203,11 +176,7 @@ id="typing">
 
 <div class="bubble">
 
-<span class="typing">
-
-● ● ●
-
-</span>
+Thinking...
 
 </div>
 
@@ -215,51 +184,43 @@ id="typing">
 
 `;
 
-chatBox.scrollTop=chatBox.scrollHeight;
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-try{
+    try{
 
-const response=
+        const response = await fetch(
 
-await fetch(
+            "https://rynovax.onrender.com/chat",
 
-"https://rynovax.onrender.com/chat",
+            {
 
-{
+                method:"POST",
 
-method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
 
-headers:{
+                body:JSON.stringify({
 
-"Content-Type":"application/json"
+                    message:message
 
-},
+                })
 
-body:JSON.stringify({
+            }
 
-message:message
+        );
 
-})
+        const data = await response.json();
 
-}
+        document.getElementById("typing")?.remove();
 
-);
+        // AI Reply
 
-const data=
-
-await response.json();
-
-document
-
-.getElementById("typing")
-
-.remove();
-
-chatBox.innerHTML+=`
+        chatBox.innerHTML += `
 
 <div class="message ai">
 
-<div class="avatar ai-avatar">
+<div class="avatar">
 
 🤖
 
@@ -269,11 +230,11 @@ chatBox.innerHTML+=`
 
 ${data.reply}
 
-<div class="time">
+<span class="time">
 
 ${getTime()}
 
-</div>
+</span>
 
 </div>
 
@@ -281,29 +242,15 @@ ${getTime()}
 
 `;
 
-saveCurrentChat();
+    }catch(error){
 
-saveHistory(title);
+        document.getElementById("typing")?.remove();
 
-chatBox.scrollTop=
-
-chatBox.scrollHeight;
-
-}
-
-catch(error){
-
-document
-
-.getElementById("typing")
-
-.remove();
-
-chatBox.innerHTML+=`
+        chatBox.innerHTML += `
 
 <div class="message ai">
 
-<div class="avatar ai-avatar">
+<div class="avatar">
 
 🤖
 
@@ -311,7 +258,7 @@ chatBox.innerHTML+=`
 
 <div class="bubble">
 
-❌ Unable to connect.
+❌ Unable to connect to RynovaX AI.
 
 </div>
 
@@ -319,45 +266,51 @@ chatBox.innerHTML+=`
 
 `;
 
-}
+    }
+
+    saveCurrentChat();
+
+    saveHistory(title);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
 
 }
 
-// ==========================================
-// Buttons & Events
-// ==========================================
+// =========================================
+// Events
+// =========================================
 
 // Send Button
 sendBtn.addEventListener("click", sendMessage);
 
 // Enter Key
-userInput.addEventListener("keydown",function(e){
+userInput.addEventListener("keydown", function(e){
 
-if(e.key==="Enter"){
+    if(e.key === "Enter"){
 
-e.preventDefault();
+        e.preventDefault();
 
-sendMessage();
+        sendMessage();
 
-}
+    }
 
 });
 
-// Sidebar
-menuBtn.addEventListener("click",function(){
+// Sidebar Toggle
+menuBtn.addEventListener("click", function(){
 
-sidebar.classList.toggle("active");
+    sidebar.classList.toggle("active");
 
 });
 
 // New Chat
-newChatBtn.addEventListener("click",function(){
+newChatBtn.addEventListener("click", function(){
 
-chatBox.innerHTML=`
+    chatBox.innerHTML = `
 
 <div class="message ai">
 
-<div class="avatar ai-avatar">
+<div class="avatar">
 
 🤖
 
@@ -365,21 +318,23 @@ chatBox.innerHTML=`
 
 <div class="bubble">
 
-<b>RynovaX AI</b>
+<h3>Welcome 👋</h3>
 
-<br><br>
+<p>
 
-Hello 👋
+Hi!
 
-I am RynovaX AI.
+I'm <b>RynovaX AI</b>.
 
 How can I help you today?
 
-<div class="time">
+</p>
+
+<span class="time">
 
 Now
 
-</div>
+</span>
 
 </div>
 
@@ -387,47 +342,50 @@ Now
 
 `;
 
-saveCurrentChat();
+    saveCurrentChat();
 
-sidebar.classList.remove("active");
+    sidebar.classList.remove("active");
 
 });
 
 // Clear Chat
-clearBtn.addEventListener("click",function(){
+clearBtn.addEventListener("click", function(){
 
-if(!confirm("Delete current chat?")) return;
+    if(confirm("Clear current chat?")){
 
-localStorage.removeItem("rynovax_chat");
+        chatBox.innerHTML = "";
 
-chatBox.innerHTML="";
+        chats = [];
 
-sidebar.classList.remove("active");
+        historyList.innerHTML = "";
+
+        localStorage.removeItem("rynovax_chat");
+
+        localStorage.removeItem("rynovax_chats");
+
+    }
 
 });
 
 // History
-historyBtn.addEventListener("click",function(){
+historyBtn.addEventListener("click", function(){
 
-loadHistory();
+    loadHistory();
+
+    sidebar.classList.add("active");
 
 });
 
-// Close sidebar when clicking outside
-document.addEventListener("click",function(e){
+// Close Sidebar when clicking outside
+document.addEventListener("click", function(e){
 
-if(
+    if(
+        !sidebar.contains(e.target) &&
+        !menuBtn.contains(e.target)
+    ){
 
-!sidebar.contains(e.target)
+        sidebar.classList.remove("active");
 
-&&
-
-!menuBtn.contains(e.target)
-
-){
-
-sidebar.classList.remove("active");
-
-}
+    }
 
 });

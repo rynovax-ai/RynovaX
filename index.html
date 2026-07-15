@@ -4,9 +4,8 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+content="width=device-width,initial-scale=1.0">
 
 <title>RynovaX AI</title>
 
@@ -17,27 +16,15 @@ href="assets/css/style.css">
 
 <body>
 
-<!-- ================= Header ================= -->
+<!-- Sidebar -->
 
-<header class="topbar">
+<aside id="sidebar" class="sidebar">
 
-<button id="menuBtn">☰</button>
-
-<div class="logo">
-
-🤖 <span>RynovaX AI</span>
-
-</div>
-
-<button id="settingBtn">⚙️</button>
-
-</header>
-
-<!-- ================= Sidebar ================= -->
-
-<div id="sidebar" class="sidebar">
+<div class="sidebar-header">
 
 <h2>🤖 RynovaX AI</h2>
+
+</div>
 
 <button id="newChatBtn">
 💬 New Chat
@@ -55,23 +42,52 @@ href="assets/css/style.css">
 🌙 Dark Mode
 </button>
 
-<hr>
+<div class="history-title">
 
-<div id="historyList"></div>
+Recent Chats
 
 </div>
 
-<!-- ================= Chat ================= -->
+<div id="historyList">
 
-<main>
+</div>
 
-<div
-class="chat-container"
-id="chatBox">
+</aside>
+
+<!-- Main -->
+
+<div class="app">
+
+<header class="topbar">
+
+<button id="menuBtn"
+class="icon-btn">
+
+☰
+
+</button>
+
+<div class="logo">
+
+🤖 RynovaX AI
+
+</div>
+
+<button id="settingBtn"
+class="icon-btn">
+
+⚙️
+
+</button>
+
+</header>
+
+<main id="chatBox"
+class="chat-area">
 
 <div class="message ai">
 
-<div class="avatar ai-avatar">
+<div class="avatar">
 
 🤖
 
@@ -79,31 +95,31 @@ id="chatBox">
 
 <div class="bubble">
 
-<b>RynovaX AI</b>
+<h3>Welcome 👋</h3>
 
-<br><br>
+<p>
 
-Hello 👋
+Hi!
 
-I am RynovaX AI.
+I'm <b>RynovaX AI</b>.
 
 How can I help you today?
 
-<div class="time">
+</p>
+
+<span class="time">
 
 Now
 
-</div>
+</span>
 
 </div>
 
 </div>
 
-</div>
+</main>
 
-<!-- ================= Input ================= -->
-
-<div class="input-area">
+<footer class="input-area">
 
 <input
 
@@ -123,9 +139,9 @@ autocomplete="off"
 
 </button>
 
-</div>
+</footer>
 
-</main>
+</div>
 
 <script src="assets/js/script.js"></script>
 

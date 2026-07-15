@@ -1,89 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="google-site-verification" content="KnYqa1DiH5EBvB363NiJwd5Y6YLQ754H9lekTTZ-IiY" />
+<meta charset="UTF-8">
 
-    <title>RynovaX AI | Think Beyond Intelligence</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+<title>RynovaX AI</title>
+
+<link rel="stylesheet"
+href="assets/css/style.css">
+
 </head>
 
 <body>
 
+<!-- ================= Header ================= -->
+
 <header class="topbar">
 
-    <button class="menu-btn">☰</button>
+<button id="menuBtn">☰</button>
 
-    <div class="logo">
-        🤖 <span>RynovaX AI</span>
-    </div>
+<div class="logo">
 
-    <button class="settings-btn">⚙️</button>
+🤖 <span>RynovaX AI</span>
+
+</div>
+
+<button id="settingBtn">⚙️</button>
 
 </header>
 
+<!-- ================= Sidebar ================= -->
+
 <div id="sidebar" class="sidebar">
 
-    <h2>🤖 RynovaX AI</h2>
+<h2>🤖 RynovaX AI</h2>
 
-    <button id="newChatBtn">💬 New Chat</button>
+<button id="newChatBtn">
+💬 New Chat
+</button>
 
-    <button id="historyBtn">🕒 History</button>
-     
-    <button id="clearBtn">🗑 Clear Chat</button>
+<button id="historyBtn">
+🕒 History
+</button>
 
-    <button id="themeBtn">🌙 Dark Mode</button>
+<button id="clearBtn">
+🗑 Clear Chat
+</button>
 
-    <button id="aboutBtn">ℹ️ About</button>
-     <hr>
+<button id="themeBtn">
+🌙 Dark Mode
+</button>
 
-<h3>Recent Chats</h3>
+<hr>
 
 <div id="historyList"></div>
 
 </div>
 
+<!-- ================= Chat ================= -->
+
 <main>
 
-<div class="chat-box" id="chatBox">
+<div
+class="chat-container"
+id="chatBox">
 
 <div class="message ai">
-    <div class="avatar ai-avatar">🤖</div>
-    <div class="bubble">
-        <b>RynovaX AI</b><br><br>
-        Hello! I am RynovaX AI.<br>
-        How can I help you today?
-    </div>
+
+<div class="avatar ai-avatar">
+
+🤖
+
+</div>
+
+<div class="bubble">
+
+<b>RynovaX AI</b>
+
+<br><br>
+
+Hello 👋
+
+I am RynovaX AI.
+
+How can I help you today?
+
+<div class="time">
+
+Now
+
 </div>
 
 </div>
+
+</div>
+
+</div>
+
+<!-- ================= Input ================= -->
 
 <div class="input-area">
 
 <input
-type="text"
-id="userInput"
-placeholder="Type your message...">
 
-<button id="sendBtn">➤</button>
+id="userInput"
+
+type="text"
+
+placeholder="Message RynovaX AI..."
+
+autocomplete="off"
+
+>
+
+<button id="sendBtn">
+
+➤
+
+</button>
 
 </div>
 
 </main>
 
-<footer>
-
-<p>Created by <b>Divyanshu Yadav</b></p>
-
-<p>© 2026 RynovaX AI • All Rights Reserved.</p>
-
-</footer>
-
 <script src="assets/js/script.js"></script>
 
 </body>
-</html>
 
+</html>

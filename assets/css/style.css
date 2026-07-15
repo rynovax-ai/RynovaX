@@ -117,122 +117,82 @@ scroll-behavior:smooth;
 
 }
 
-/* ========= Message ========= */
+/* ===== Chat Bubble Fix ===== */
 
 .message{
-
-display:flex;
-
-gap:10px;
-
-align-items:flex-end;
-
+    display:flex;
+    align-items:flex-end;
+    margin:12px 0;
+    gap:10px;
 }
 
 .ai{
-
-justify-content:flex-start;
-
+    justify-content:flex-start;
 }
 
 .user{
-
-justify-content:flex-end;
-
+    justify-content:flex-end;
 }
-
-/* ========= Avatar ========= */
-
-.avatar{
-
-width:40px;
-
-height:40px;
-
-border-radius:50%;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:18px;
-
-flex-shrink:0;
-
-}
-
-.ai-avatar{
-
-background:#2563eb;
-
-}
-
-.user-avatar{
-
-background:#22c55e;
-
-}
-
-/* ========= Bubble ========= */
 
 .bubble{
+    display:inline-block;
+    width:auto;
+    max-width:75%;
+    min-width:70px;
 
-display:inline-block;
+    padding:12px 16px;
 
-max-width:75%;
+    border-radius:18px;
 
-padding:12px 16px;
+    line-height:1.5;
 
-border-radius:18px;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    white-space:pre-wrap;
 
-font-size:15px;
-
-line-height:1.6;
-
-white-space:pre-wrap;
-
-word-break:break-word;
-
-box-shadow:0 3px 10px rgba(0,0,0,.25);
-
-animation:fadeIn .25s ease;
-
+    height:auto;
 }
 
 .ai .bubble{
-
-background:#1e293b;
-
-color:#fff;
-
-border-top-left-radius:6px;
-
+    background:#20283a;
+    color:white;
+    border-top-left-radius:6px;
 }
 
 .user .bubble{
+    background:#2563eb;
+    color:white;
+    border-top-right-radius:6px;
+}
 
-background:#2563eb;
+.avatar{
+    width:38px;
+    height:38px;
 
-color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-border-top-right-radius:6px;
+    border-radius:50%;
 
-margin-left:auto;
+    font-size:20px;
 
+    flex-shrink:0;
+}
+
+.ai-avatar{
+    background:#2563eb;
+}
+
+.user-avatar{
+    background:#22c55e;
 }
 
 .time{
-
-margin-top:8px;
-
-font-size:11px;
-
-opacity:.65;
-
-text-align:right;
-
+    margin-top:8px;
+    font-size:11px;
+    opacity:.65;
+    text-align:right;
 }
 
 /* ========= Input ========= */

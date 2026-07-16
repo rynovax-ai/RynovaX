@@ -115,6 +115,26 @@ function openHistory(index){
 
 }
 
+// ===============================
+// Copy AI Reply
+// ===============================
+
+function copyText(btn){
+
+    const text = btn.parentElement.querySelector(".reply").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    btn.innerHTML = "✅ Copied";
+
+    setTimeout(()=>{
+
+        btn.innerHTML="📋 Copy";
+
+    },2000);
+
+}
+
 // =========================================
 // Send Message
 // =========================================
@@ -216,27 +236,33 @@ Thinking...
 
         // AI Reply
 
-        chatBox.innerHTML += `
+chatBox.innerHTML += `
 
 <div class="message ai">
 
-<div class="avatar">
+    <div class="avatar">
+        🤖
+    </div>
 
-🤖
+    <div class="bubble">
 
-</div>
+        <div class="reply">
+            ${data.reply}
+        </div>
 
-<div class="bubble">
+        <div class="bubble-footer">
 
-${data.reply}
+            <button class="copy-btn" onclick="copyText(this)">
+                📋 Copy
+            </button>
 
-<span class="time">
+            <span class="time">
+                ${getTime()}
+            </span>
 
-${getTime()}
+        </div>
 
-</span>
-
-</div>
+    </div>
 
 </div>
 
